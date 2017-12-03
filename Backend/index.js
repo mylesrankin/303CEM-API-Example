@@ -32,17 +32,17 @@ server.use(function (req, res, next) {
 
 // DB Details
 const dbData = {
-	host: "37.122.214.88",
-	user: "myles-xwef-u-147573",
-	password: "6Y4me-9m7",
-	database: "myles-xwef-u-147573"
+	host: "localhost",
+	user: "admin",
+	password: "someTravels2017",
+	database: "someTravels"
 }
 
 
 
 // Serve default page
 server.get('/', (req,res) => {
-	var body = '<html><body>ALIVE</body></html>';
+	var body = '<html><body>API Server Online</body></html>';
 	res.writeHead(200, {
 		'Content-Length': Buffer.byteLength(body),
   		'Content-Type': 'text/html'
@@ -52,7 +52,7 @@ server.get('/', (req,res) => {
 
 });
 
-server.get('api/v1/users', (req,res) => {
+server.get('api/v1/holidays', (req,res) => {
 	getHolidays(dbData, function(result){
 		res.send(result);
 		res.status(201);
@@ -61,7 +61,7 @@ server.get('api/v1/users', (req,res) => {
 
 function getHolidays(conDetails, callback){
 	db.connect(conDetails, function(err, data){
-		var sql = 'SELECT * FROM Users';
+		var sql = 'SELECT * FROM destinations';
 		console.log('Grabbing database contents');
 		data.query(sql, function(err,data){
 			if (err) throw err;
